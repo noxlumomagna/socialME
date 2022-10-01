@@ -1,2 +1,8 @@
 # socialME
-Like this readme, this project is a work in progress. Further details incoming. Thanks for your patience. 
+Social Media Style CRUD application. Using 
+
+
+
+How It's Made:
+<hr>
+Tech Used: Javascript, EJS, Node.js, Express.js, Qoddi for hosting
