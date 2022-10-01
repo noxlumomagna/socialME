@@ -1,5 +1,5 @@
 # socialME
-Social Media Style CRUD application. Using 
+Social Media Style CRUD application.
 
 
 
