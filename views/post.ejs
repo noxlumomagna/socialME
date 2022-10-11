@@ -1,33 +1,41 @@
 <%- include('partials/header') -%>
-  <div class="container-fluid">
+  <div class="card-img-top container-fluid">
     <div class="row justify-content-center mt-5">
-      <div class="col-6">
+      <div class="card col-6" style="width: 40rem; height: auto;">
         <section class="post-group">
-          <h2>
-            <%= post.title %>
+
+          <h2 class="mt-2 mb-2">
+            #<%= post.title %>
           </h2>
-          <img class="img-fluid" src="<%= post.image%>" />
-          <div class="row justify-content-between">
-            <h3>
-              <%= post.likes %> Points
-            </h3>
-            <form class="col-1" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+          <div>
+            <img class="card-img-top img-fluid" src="<%= post.image%>" />
+          </div>
+          <div class="col justify-content-between">
+
+            <form class="row-6" action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
+              <div>
+                <p>
+                  <%= post.caption %>
+                </p>
+              </div>
               <div class="likes">
-                <button class="btn btn-success fa fa-thumbs-up" type="submit"></button>
+                <button class="btn btn-success fa fa-square-plus" type="submit">
+                </button>
+                <span>
+                  <bold>
+                    <%= post.likes %> upvotes
+                  </bold>
+                </span>
               </div>
             </form>
-            <%if(post.user==user.id){ %>
-              <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-3">
-                <div class="likes">
-                  <button class="btn btn-danger fa fa-trash" type="submit"></button>
-              </form>
-              <%}%>
+            <!-- <%if(post.user==user.id){ %> -->
+            <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="row-6">
+              <div class="likes">
+                <button class="mb-3 btn btn-danger fa fa-square-minus" type="submit"> Delete</button>
+            </form>
+            <%}%>
           </div>
-          <div>
-            <p>
-              <%= post.caption %>
-            </p>
-          </div>
+
         </section>
       </div>
     </div>
@@ -35,30 +43,29 @@
 
 
     <!-- Comment Form Section -->
-    <div class="mt-5 ">
-      <h2>Add a Comment</h2>
+    <div class="mt-5">
+      <h2>Add a comment</h2>
       <form action="/comment/createComment/<%= post._id%>" method="POST">
         <div class="mb-3">
           <label for="comment" class="form-label">Comment</label>
           <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-success">Comment</button>
+        <button type="submit" class="btn btn-primary">Comment</button>
       </form>
 
     </div>
     <!-- Display Comments-->
-    <ul class="list-group-flush ">
+    <ul class="card-img-top mt-3 list-group-flush ">
       <% for(var i=0; i<comments.length; i++) {%>
         <li class="list-group-item">
           <div class="comment-section">
             <!-- Comment Username: Comment -->
             <%= comments[i].createdBy %>: <%= comments[i].comment%>
                 <!-- If the user is logged in, should see a trash can for their own comment -->
-                <%if(comments[i].createdById==user.id) { %>
+                <%if(comments[i].createdById==user.id) { %> <button type="submit"
+                    class="btn btn-dark fa fa-trash"></button>
                   <form action="/comment/deleteComment/<%=post._id%>/<%= comments[i]._id %>?_method=DELETE"
                     method="POST">
-
-                    <button type="submit" class="btn btn-dark fa fa-trash"></button>
                   </form>
           </div>
           <%}%>
@@ -69,9 +76,9 @@
   <!-- Return Navigation -->
 
   </div>
-  <div class="col-6 mt-5 text-center">
-    <a class="btn btn-outline-info" href="/profile">To Profile</a>
-    <a class="btn btn-outline-warning" href="/feed">To Feed</a>
+  <div class="row-6 mt-5 text-center">
+    <a class="btn btn-info" href="/profile">To Profile</a>
+    <a class="btn btn-warning" href="/feed">To Feed</a>
   </div>
   </div>
 
